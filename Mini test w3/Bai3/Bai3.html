@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bai3</title>
+</head>
+<body>
+<div id="sum"></div>
+</body>
+<script>
+    let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+    let sum = 0;
+    let result = 0;
+    for (let i = 0; i < arr.length; i++) {
+        result = checkPrime(arr[i])
+    }
+    document.getElementById("sum").innerHTML = "Tong cac so nguyen to trong day la: " + result
+
+
+    function checkPrime(n) {
+        let isPrime = true;
+        //Check giá trị với 2
+        if (n < 2) {
+            isPrime = false;
+
+        } else if (n === 2) {
+            isPrime = true;
+        } else if (n % 2 === 0) {
+            isPrime = false;
+        } else
+            //check số lẻ
+            for (let i = 3; i < (n / 2); i += 2) {
+                if (n % i === 0) {
+                    isPrime = false
+                    break;
+                }
+            }
+        if (isPrime === true) {
+            document.write(n + "<br>")
+            sum += n;
+
+        }
+        return sum;
+
+    }
+
+</script>
+</html>
