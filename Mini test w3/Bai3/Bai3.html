@@ -8,13 +8,17 @@
 <div id="sum"></div>
 </body>
 <script>
-    let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+    let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 23, 71, 20]
     let sum = 0;
-    let result = 0;
     for (let i = 0; i < arr.length; i++) {
-        result = checkPrime(arr[i])
+        let result = checkPrime(arr[i])
+        if (result == true) {
+            document.write(arr[i] + "<br>")
+            sum += arr[i];
+
+        }
     }
-    document.getElementById("sum").innerHTML = "Tong cac so nguyen to trong day la: " + result
+    document.getElementById("sum").innerHTML = "Tong cac so nguyen to trong day la: " + sum
 
 
     function checkPrime(n) {
@@ -35,13 +39,7 @@
                     break;
                 }
             }
-        if (isPrime === true) {
-            document.write(n + "<br>")
-            sum += n;
-
-        }
-        return sum;
-
+        return isPrime;
     }
 
 </script>
