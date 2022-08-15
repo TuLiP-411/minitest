@@ -60,11 +60,4 @@ public class FulltimeEmployee extends Employee {
                 '}';
     }
 
-//    @Override
-//    public int compareTo(FulltimeEmployee o) {
-//        if (getSalary() > o.getSalary()) return 1;
-//        else if (getSalary() < o.getSalary()) return -1;
-//        else return 1;
-//
-//    }
 }
