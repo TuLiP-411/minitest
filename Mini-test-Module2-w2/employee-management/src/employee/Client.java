@@ -41,13 +41,8 @@ public class Client {
 
     //    7: Viết phương thức liệt kê danh sách nhân viên toàn thời gian có mức lương thấp hơn mức lương trung bình của các nhân viên trong công ty.
     public static String lessThanAverageFulltime(Employee[] arr) {
-        int sum = 0;
-        int averageSalary = 0;
+        int averageSalary = averageSalary(arr);
         String result = "";
-        for (int i = 0; i < arr.length; i++) {
-            sum += arr[i].getSalary();
-        }
-        averageSalary = sum / arr.length;
         for (Employee e : arr
         ) {
             if (e instanceof FulltimeEmployee) {
@@ -72,6 +67,7 @@ public class Client {
         return sum;
     }
 
+    //9: Viết phương thức sắp xếp nhân viên toàn thời gian theo số lương tăng dần.
     public static String sortFulltime(Employee[] arr) {
         Arrays.sort(arr);
         String result = "";

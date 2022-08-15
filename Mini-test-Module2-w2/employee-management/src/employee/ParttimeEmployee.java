@@ -1,6 +1,7 @@
 package employee;
 
 public class ParttimeEmployee extends Employee {
+    public static final int HOUR_SALARY = 100000;
     private int workHour;
 
     public ParttimeEmployee() {
@@ -25,7 +26,7 @@ public class ParttimeEmployee extends Employee {
 
     @Override
     public int getSalary() {
-        int payroll = workHour * 100000;
+        int payroll = workHour * HOUR_SALARY;
         return payroll;
     }
 
