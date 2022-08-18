@@ -56,11 +56,19 @@ public class Meat extends Material implements Discount {
     @Override
     public double getRealMoney() {
         double realMoney;
-        int remainPeriod = LocalDate.now().compareTo(getManufacturingDate());
-        if (remainPeriod <= 5) {
-            realMoney = getAmount() * (100 - FIVE_DAYS_DISCOUNT) / 100;
+        if (LocalDate.now().isAfter(getExpiryDate())) {
+            try {
+                throw new Exception("Product has already been expried");
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
         } else {
-            realMoney = getAmount() * (100 - GENERAL_DISCOUNT) / 100;
+            int remainPeriod = LocalDate.now().compareTo(getExpiryDate());
+            if (remainPeriod <= 5) {
+                realMoney = getAmount() * (100 - FIVE_DAYS_DISCOUNT) / 100;
+            } else {
+                realMoney = getAmount() * (100 - GENERAL_DISCOUNT) / 100;
+            }
         }
         return realMoney;
 

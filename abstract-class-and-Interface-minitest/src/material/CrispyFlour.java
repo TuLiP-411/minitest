@@ -56,13 +56,21 @@ public class CrispyFlour extends Material implements Discount {
     @Override
     public double getRealMoney() {
         double realMoney;
-        int remainPeriod = LocalDate.now().compareTo(getManufacturingDate());
-        if (remainPeriod <= 2) {
-            realMoney = getAmount() * (100 - TWO_MONTHS_DISCOUNT) / 100;
-        } else if (remainPeriod <= 4) {
-            realMoney = getAmount() * (100 - FOUR_MONTHS_DISCOUNT) / 100;
+        if (LocalDate.now().isAfter(getExpiryDate())) {
+            try {
+                throw new Exception("Product has already been expried");
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
         } else {
-            realMoney = getAmount() * (100 - GENERAL_DISCOUNT) / 100;
+            int remainPeriod = LocalDate.now().compareTo(getExpiryDate());
+            if (remainPeriod <= 2) {
+                realMoney = getAmount() * (100 - TWO_MONTHS_DISCOUNT) / 100;
+            } else if (remainPeriod <= 4) {
+                realMoney = getAmount() * (100 - FOUR_MONTHS_DISCOUNT) / 100;
+            } else {
+                realMoney = getAmount() * (100 - GENERAL_DISCOUNT) / 100;
+            }
         }
         return realMoney;
     }
