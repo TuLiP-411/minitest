@@ -2,6 +2,7 @@ package material;
 
 import discount.Discount;
 
+import java.time.Duration;
 import java.time.LocalDate;
 
 public class Meat extends Material implements Discount {
@@ -55,20 +56,17 @@ public class Meat extends Material implements Discount {
 
     @Override
     public double getRealMoney() {
-        double realMoney;
-        if (LocalDate.now().isAfter(getExpiryDate())) {
-            try {
-                throw new Exception("Product has already been expried");
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        } else {
-            int remainPeriod = LocalDate.now().compareTo(getExpiryDate());
+        double realMoney = 0;
+        try {
+            long remainPeriod = (Duration.between(LocalDate.now(), getExpiryDate()).toDays());
             if (remainPeriod <= 5) {
                 realMoney = getAmount() * (100 - FIVE_DAYS_DISCOUNT) / 100;
             } else {
                 realMoney = getAmount() * (100 - GENERAL_DISCOUNT) / 100;
             }
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return realMoney;
 

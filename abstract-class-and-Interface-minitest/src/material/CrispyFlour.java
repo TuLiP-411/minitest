@@ -2,6 +2,8 @@ package material;
 
 import discount.Discount;
 
+import java.text.ParseException;
+import java.time.Duration;
 import java.time.LocalDate;
 
 public class CrispyFlour extends Material implements Discount {
@@ -55,15 +57,9 @@ public class CrispyFlour extends Material implements Discount {
 
     @Override
     public double getRealMoney() {
-        double realMoney;
-        if (LocalDate.now().isAfter(getExpiryDate())) {
-            try {
-                throw new Exception("Product has already been expried");
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        } else {
-            int remainPeriod = LocalDate.now().compareTo(getExpiryDate());
+        double realMoney = 0;
+        try {
+            long remainPeriod = (Duration.between(LocalDate.now(), getExpiryDate()).toDays()) / 30;
             if (remainPeriod <= 2) {
                 realMoney = getAmount() * (100 - TWO_MONTHS_DISCOUNT) / 100;
             } else if (remainPeriod <= 4) {
@@ -71,6 +67,8 @@ public class CrispyFlour extends Material implements Discount {
             } else {
                 realMoney = getAmount() * (100 - GENERAL_DISCOUNT) / 100;
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return realMoney;
     }
